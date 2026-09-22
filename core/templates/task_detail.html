@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Detail – Taskflow</title>
+    <meta name="description" content="View task details." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">✦</div>
+            Taskflow
+        </a>
+        <div class="navbar-actions">
+            <a href="index.html" class="nav-link">Tasks</a>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN ========== -->
+    <main class="page-container">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Tasks</a>
+            <span class="breadcrumb-sep">›</span>
+            <!-- Django: {{ task.title }} -->
+            <span>Design the landing page</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <!-- Django: <h1 class="page-title">{{ task.title }}</h1> -->
+                <h1 class="page-title">Design the landing page</h1>
+
+                <div style="display:flex; align-items:center; gap:10px; margin-top:8px;">
+                    <!-- Django: badge based on task.priority -->
+                    <span class="badge badge-high">High Priority</span>
+                    <!-- Django: badge based on task.status -->
+                    <span class="badge badge-active">Active</span>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div style="display:flex; gap:10px; flex-shrink:0;">
+                <a href="task_edit.html" class="btn btn-secondary">✎ Edit</a>
+                <a href="task_delete.html" class="btn btn-danger">✕ Delete</a>
+            </div>
+        </div>
+
+        <!-- ===== DETAIL GRID ===== -->
+        <div class="detail-grid">
+
+            <!-- LEFT: Main content -->
+            <div style="display:flex; flex-direction:column; gap:20px;">
+
+                <!-- Description -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="detail-section-title">Description</div>
+
+                        <!-- Django: {% if task.description %} -->
+                        <p class="detail-body">
+                            <!-- Django: {{ task.description }} -->
+                            Create wireframes and high-fidelity mockups for the new marketing landing page.
+                            Coordinate with the design team and get sign-off before implementation begins.
+                            Make sure the designs are responsive and follow the brand guidelines.
+                        </p>
+                        <!-- Django: {% else %} -->
+                        <!-- <p class="detail-body" style="color:var(--text-3); font-style:italic;">No description provided.</p> -->
+                        <!-- Django: {% endif %} -->
+                    </div>
+                </div>
+
+                <!-- Tags -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="detail-section-title">Tags</div>
+                        <div class="tags-row" style="margin-top:10px;">
+                            <!-- Django: {% for tag in task.tags.all %} -->
+                            <span class="tag">design</span>
+                            <span class="tag">frontend</span>
+                            <span class="tag">urgent</span>
+                            <!-- Django: {% endfor %} -->
+
+                            <!-- Django: {% if not task.tags.all %} -->
+                            <!-- <span style="font-size:0.82rem; color:var(--text-3);">No tags</span> -->
+                            <!-- Django: {% endif %} -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: Meta sidebar -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="detail-section-title" style="margin-bottom:0;">Details</div>
+                    <div class="detail-meta-list">
+
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-key">Status</span>
+                            <!-- Django: {{ task.get_status_display }} -->
+                            <span class="badge badge-active">Active</span>
+                        </div>
+
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-key">Priority</span>
+                            <!-- Django: {{ task.get_priority_display }} -->
+                            <span class="badge badge-high">High</span>
+                        </div>
+
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-key">Due Date</span>
+                            <!-- Django: {{ task.due_date|date:"M j, Y" }} -->
+                            <span class="detail-meta-val" style="color:var(--red);">Mar 1, 2026 (Overdue)</span>
+                        </div>
+
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-key">Created</span>
+                            <!-- Django: {{ task.created_at|date:"M j, Y" }} -->
+                            <span class="detail-meta-val">Feb 20, 2026</span>
+                        </div>
+
+                        <div class="detail-meta-item">
+                            <span class="detail-meta-key">Updated</span>
+                            <!-- Django: {{ task.updated_at|date:"M j, Y" }} -->
+                            <span class="detail-meta-val">Feb 28, 2026</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer" style="flex-direction:column;">
+                    <a href="task_edit.html" class="btn btn-primary" style="width:100%;">✎ Edit Task</a>
+
+                    <!--
+            Django toggle status:
+            <form method="POST" action="{% url 'task-toggle' task.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-secondary" style="width:100%;">Mark as Done</button>
+            </form>
+          -->
+                    <a href="index.html" class="btn btn-secondary" style="width:100%;">✓ Mark as Done</a>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.detail-grid -->
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Task – Taskflow</title>
+    <meta name="description" content="Confirm task deletion." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">✦</div>
+            Taskflow
+        </a>
+        <div class="navbar-actions">
+            <a href="index.html" class="nav-link">Tasks</a>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN ========== -->
+    <main class="page-container" style="max-width:560px;">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Tasks</a>
+            <span class="breadcrumb-sep">›</span>
+            <!-- Django: <a href="{% url 'task-detail' task.pk %}">{{ task.title }}</a> -->
+            <a href="task_detail.html">Design the landing page</a>
+            <span class="breadcrumb-sep">›</span>
+            <span>Delete</span>
+        </div>
+
+        <!-- ===== DELETE CONFIRM CARD ===== -->
+        <div class="card danger-card">
+            <div class="card-body">
+
+                <!-- Warning icon -->
+                <div class="danger-icon">⚠️</div>
+
+                <!-- Title + message -->
+                <div class="danger-title">Delete this task?</div>
+                <p class="danger-message">
+                    You are about to permanently delete this task. This action
+                    <strong>cannot be undone</strong>.
+                </p>
+
+                <!-- Task preview -->
+                <div class="task-preview-box">
+                    <div class="task-preview-title">
+                        <!-- Django: {{ task.title }} -->
+                        Design the landing page
+                    </div>
+                    <div class="task-preview-meta">
+                        <!-- Django: {{ task.get_priority_display }} -->
+                        <span>🔴 High Priority</span>
+                        <!-- Django: {{ task.due_date|date:"M j, Y" }} -->
+                        <span>📅 Due Mar 1, 2026</span>
+                        <!-- Django: {{ task.get_status_display }} -->
+                        <span>● Active</span>
+                    </div>
+                </div>
+
+                <!--
+          Django:
+          <form method="POST" action="{% url 'task-delete' task.pk %}">
+            {% csrf_token %}
+            ...
+          </form>
+        -->
+
+            </div>
+            <div class="card-footer" style="justify-content:flex-end;">
+                <a href="task_detail.html" class="btn btn-ghost">Cancel, keep task</a>
+                <!-- Django: this button should be inside the POST form -->
+                <a href="index.html" class="btn btn-danger">Yes, delete task</a>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </main>
+
+</body>
+
+</html>

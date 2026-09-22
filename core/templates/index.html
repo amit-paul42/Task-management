@@ -1,0 +1,114 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %} Main page/ Index page {% endblock %}
+{% block description %} View and manage all your tasks. {% endblock %}
+   
+
+
+
+
+
+
+<!-- ========== MAIN ========== -->
+ {% block main_content %}
+    <main class="page-container">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <h1 class="page-title">My Tasks</h1>
+                <p class="page-subtitle">Manage and track your daily work</p>
+            </div>
+            <a href="{% url 'task_create' %}" class="btn btn-primary">＋ New Task</a>
+        </div>
+
+  
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-card total">
+                <div class="stat-value">5</div>
+                <!-- Django: {{ total_count }} -->
+                <div class="stat-label">Total</div>
+            </div>
+            <div class="stat-card active">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Active</div>
+            </div>
+            <div class="stat-card completed">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Completed</div>
+            </div>
+        </div>
+
+        <!-- Task Table Card -->
+        <div class="card">
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <a href="index.html" class="filter-chip active">All</a>
+                    <a href="index.html?status=active" class="filter-chip">Active</a>
+                    <a href="index.html?status=completed" class="filter-chip">Completed</a>
+                </div>
+                <div class="filter-group">
+                    <a href="index.html?priority=high" class="filter-chip">🔴 High</a>
+                    <a href="index.html?priority=medium" class="filter-chip">🟡 Medium</a>
+                    <a href="index.html?priority=low" class="filter-chip">🟢 Low</a>
+                </div>
+            </div>
+
+            <!-- Task Table -->
+            <div class="task-table-wrap">
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Priority</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+
+                        <tr>
+                            <td class="task-title-cell" {% if task.status == 'completed' %} style="text-decoration: line-through;" {% endif %}>
+                                <a href="task_detail.html" class="task-title-link">{{ task.title }}</a>
+                            </td>
+                            <td><span class="badge badge-high">{{ task.priority }}</span></td>
+                            <td class="due-cell overdue">{{ task.due_date }}</td>
+                            <td><span class="badge badge-active">{{ task.status }}</span></td>
+                            <td>
+                                <div class="task-actions-cell">
+                                    <a href="task_detail.html" class="btn btn-ghost btn-sm btn-icon" title="View">👁</a>
+                                    <a href="task_edit.html" class="btn btn-ghost btn-sm btn-icon" title="Edit">✎</a>
+                                    <a href="{% url 'task_delete' task.pk %}" class="btn btn-ghost btn-sm btn-icon" title="Delete"
+                                        style="color:var(--red);">✕</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+              
+
+                    </tbody>
+                </table>
+            </div>
+            <!--
+      <div class="empty-state">
+        <div class="empty-icon">🌿</div>
+        <div class="empty-title">No tasks yet</div>
+        <div class="empty-sub">Create your first task to get started</div>
+        <a href="task_create.html" class="btn btn-primary">＋ New Task</a>
+      </div>
+      -->
+
+        </div><!-- /.card -->
+    </main>
+    {% endblock %}
+
+</body>
+
+</html>
